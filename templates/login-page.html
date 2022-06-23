@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block css %}
+    <link rel="stylesheet" href="/static/login.css">
+{% endblock %}
+
+{% block title %}sharefol.io - Home{% endblock %}
+
+{% block content %}
+
+<div class="login-wrap">
+    <div class="login-header">Login</div>
+    <div class="login-form">
+        <form action="/login" method="POST">
+            {{ form.hidden_tag() }}
+            {% for field in form %}
+                {% for error in field.errors %}
+                <p class="error">{{error}}</p>
+                {% endfor %}
+            {% endfor %}
+            
+            <div class="login-input">
+                <label for="">Username</label>
+                <div class="input-w-icon">
+                    <img class="login-icon" src="/static/icons/user.svg" alt="user-icon">
+                    {{form.username (placeholder = 'Type your username')}}
+                </div>
+                <hr size='1' noshade>
+            </div>
+    
+            <div class="login-input">
+                <label for="">Password</label>
+                <div class="input-w-icon">
+                    <img class="login-icon" src="/static/icons/lock.svg" alt="lock-icon">
+                    {{form.password (placeholder = 'Type your password')}}
+                </div>
+                <hr size='1' noshade>
+            </div>
+    
+            <div>
+                <button class="login-btn">LOGIN</button>
+            </div>
+            
+        </form>
+    </div>
+    <div class="bottom-links">
+        <p>or create an account using</p>
+        <a href="/sign-up">SIGN UP</a>
+    </div>
+
+</div>
+
+
+{% endblock %}

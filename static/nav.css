@@ -1,0 +1,70 @@
+/* Nav Bar */
+
+#nav {
+    position: relative;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    background-color: #333333;
+    height: 50px;
+    width: 100%;
+}
+
+#nav a {
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+}
+
+#nav a:hover {
+    color: #77DD77;
+}
+
+#nav a:visited { 
+    text-decoration: none;  
+}
+
+.nav-wrapper {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 4%;
+    height: 50px;
+}
+
+#middle-nav {
+    margin: 0;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 10;
+}
+
+#middle-nav ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    list-style: none;
+    padding: 0;
+    color: white;
+}
+
+#middle-nav ul li {
+    margin-left: 25px;
+    margin-right: 25px;
+    display: block;
+    transition: .3s;
+}
+
+.logo {
+    z-index: 12;
+}
+
+.login-button {
+    z-index: 12;
+}
+
+/*/////////////////////////////////////////////////*/

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}TITLE{% endblock %}</title>
+    {% block css %}{% endblock %}
+    <link rel="stylesheet" href="/static/nav.css">
+    <link rel="stylesheet" href="/static/global.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav id="nav">
+        <div class="nav-wrapper">
+            <div class="logo">
+                <a href="/">sharefol.io</a>
+            </div>
+            <div id="middle-nav">
+                {% block middleNav %}
+                {% endblock %}
+            </div>
+            <div class="login-button">
+                {% if 'user_id' not in session %}
+                    <a href="/login" class="button">Login/Sign Up</a>
+                {% endif %}
+                {% if 'user_id' in session %}
+                    <a href="/logout" class="button">Logout</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+    {% block content %}
+        CONTENT
+    {% endblock %}
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="/static/stocks.js"></script>
+</body>
+</html>

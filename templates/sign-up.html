@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block css %}
+    <link rel="stylesheet" href="/static/login.css">
+{% endblock %}
+
+{% block title %}sharefol.io - Home{% endblock %}
+
+{% block content %}
+
+<div class="login-wrap">
+    <div class="login-header">Sign Up</div>
+    <div class="login-form">
+        <form action="/sign-up" method="POST">
+            {{ form.hidden_tag() }}
+
+            {{ form.hidden_tag() }}
+            {% for field in form %}
+                {% for error in field.errors %}
+                <p class="error">{{error}}</p>
+                {% endfor %}
+            {% endfor %}
+
+            <div class="login-input">
+                <label for="">Email</label>
+                <div class="input-w-icon">
+                    <img class="login-icon" src="/static/icons/mail.svg" alt="user-icon">
+                    {{form.email (placeholder = 'Type your email')}}
+                </div>
+                <hr size='1' noshade>
+            </div>
+
+            <div class="login-input">
+                <label for="">Username</label>
+                <div class="input-w-icon">
+                    <img class="login-icon" src="/static/icons/user.svg" alt="user-icon">
+                    {{form.username (placeholder = 'Create your username')}}
+                </div>
+                <hr size='1' noshade>
+            </div>
+    
+            <div class="login-input">
+                <label for="">Password</label>
+                <div class="input-w-icon">
+                    <img class="login-icon" src="/static/icons/lock.svg" alt="lock-icon">
+                    {{form.password (placeholder = 'Create your password')}}
+                </div>
+                <hr size='1' noshade>
+            </div>
+            <div>
+                <button class="login-btn">SIGN UP</button>
+            </div>
+        </form>
+    </div>
+    <div class="bottom-links">
+        <p>or login into an existing account using</p>
+        <a href="/login">LOGIN</a>
+    </div>
+
+</div>
+
+
+{% endblock %}
