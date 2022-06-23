@@ -1,0 +1,103 @@
+.btn {
+    margin-top: 10px;
+    border: none;
+    padding: 5px;
+    border-radius: 100px;
+    border: 1px solid #77DD77;
+    color: #77DD77;
+    background-color: white;
+    cursor: pointer;
+    width: 100%;
+    font-size: 20px;
+    height: 40px;
+}
+
+.btn:hover {
+    background-color: #77DD77;
+    color: white;
+}
+
+.container {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 40px;
+    margin-bottom: 80px;
+    align-items: center;
+}
+
+img {width: 100%}
+
+.slide-left {
+    animation: 1.5s ease-in-out 0s 1 slideInFromLeft;
+}
+
+.left {
+    box-shadow: rgba(47, 87, 47, 0.4) -5px 5px, rgba(47, 87, 47, 0.3) -10px 10px, rgba(47, 87, 47, 0.2) -15px 15px, rgba(47, 87, 47, 0.1) -20px 20px, rgba(47, 87, 47, 0.05) -25px 25px;
+}
+
+.slide-right {
+    animation: 1.5s ease-in-out 0s 1 slideInFromRight;
+}
+
+.right {
+    box-shadow: rgba(47, 87, 47, 0.4) 5px 5px, rgba(47, 87, 47, 0.3) 10px 10px, rgba(47, 87, 47, 0.2) 15px 15px, rgba(47, 87, 47, 0.1) 20px 20px, rgba(47, 87, 47, 0.05) 25px 25px;
+}
+
+.home-img {
+    overflow: hidden;
+    width: 50%;
+    border-radius: 20px;
+}
+
+.fade-in {
+    animation: fadein 3s;
+}
+
+.home-info {
+    width: 40%;
+}
+
+.home-info p {
+    font-size: 40px;
+}
+
+@keyframes slideInFromLeft {
+    0% {
+      transform: translateX(-110%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+}
+
+@keyframes slideInFromRight {
+    0% {
+      transform: translateX(110%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+h1 {
+    text-align: center;
+    font-size: 50px;
+    font-weight: 400;
+}
+
+.footer {
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.footer p {
+    text-align: center;
+    top: 50px;
+}

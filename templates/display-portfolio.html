@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block css %}
+    <link rel="stylesheet" href="/static/stocks.css">
+{% endblock %}
+
+{% block middleNav %}
+    <ul class="nav-list">
+            <p>{{username}}'s Portfolio</p>
+    </ul>  
+{% endblock %}
+
+{% block title %}sharefol.io - Home{% endblock %}
+
+{% block content %}
+
+<div class="wrap">
+    <div class="rTable">
+        <div class="rTableRow">
+            {% if show_exact == False %}
+                <div class="rTableHead head-left w-50">Symbol</div>
+                <div class="rTableHead head-right w-50">Percentage</div>
+            {% endif %}
+            {% if show_exact == True %}
+                <div class="rTableHead head-left w-25">Symbol</div>
+                <div class="rTableHead w-25">Percentage</div>
+                <div class="rTableHead w-25">Shares</div>
+                <div class="rTableHead w-25 head-right">Value</div>
+            {% endif %}
+        </div>
+
+        <div class="rTableBody">
+            {% for h in holdings %}
+                <div class="rTableRow">
+                    {% if show_exact == False %}
+                        <div class="rTableCell w-50"><a href="" class="open-data">{{ h.ticker }}</a></div>
+                        <div class="rTableCell w-50">{{ h.portfolio_percent }}%</div>
+                    {% endif %}
+                    {% if show_exact == True %}
+                        <div class="rTableCell w-25"><a href="" class="open-data">{{ h.ticker }}</a></div>
+                        <div class="rTableCell w-25">{{ h.portfolio_percent }}%</div>
+                        <div class="rTableCell w-25">{{ h.shares }}</div>
+                        <div class="rTableCell w-25">{{ h.total_value }}</div>
+                    {% endif %}
+                </div>
+                <div class="rTableRow hidden-data">
+                    <div class="stock-data-row">
+                        <div class="stock-information">
+                            <div class="name-price">
+                                <div class="stock-name">{{ h.name }}</div>
+                                <div class="price-area">
+                                    <span class="main-price">${{ h.price }}</span>
+                                    <span class="day-change">({{ h.changesPercentage }}%)</span>
+                                </div>
+                            </div>
+                            <div class="data-container">
+                                <div>
+                                    <div>Day Range: <span class="data">${{ h.dayLow }} - ${{ h.dayHigh }}</span></div>
+                                </div>
+                                <div>
+                                    <div>Year Range: <span class="data">${{ h.yearLow }} - ${{ h.yearHigh }}</span></div>
+                                </div>
+                                <div>
+                                    <div>Mkt Cap: <span class="data">{{ h.marketCap }}</span></div>
+                                    <div>Vol: <span class="data">{{ h.volume }}</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="portfolio-total toggle-visible" style="display:none">
+        <span>Total:</span>
+        <span id="total-value-amount">0</span>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,102 @@
+.login-wrap{
+    margin: auto;
+    position: relative;
+    background-color: white;
+    margin-top: 80px;
+    margin-bottom: 15px;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 400px;
+}
+
+.login-wrap hr {
+    color: rgba(0, 0, 0, 0.001);
+}
+
+.login-header {
+    font-size: 30px;
+    text-align: center;
+}
+
+.login-input label {
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+.login-input input {
+    font-size: 15px;
+    background: transparent;
+    border: none;
+    width: 85%;
+}
+
+.login-input input:focus {
+    outline: none;
+}
+
+.input-w-icon {
+    width: 95%;
+    margin: auto;
+}
+
+.login-form {
+    width: 80%;
+    height: 100%;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 50px
+}
+
+.login-form form {
+    display: grid;
+    gap: 20px;
+}
+
+.bottom-links {
+    text-align: center;
+    bottom: 0;
+}
+
+.bottom-links p {
+    font-size: 12px;
+}
+
+.bottom-links a {
+    color: black;
+}
+
+.bottom-links a:hover {
+    color: #77DD77;
+}
+
+.login-btn {
+    margin-top: 10px;
+    border: none;
+    padding: 5px;
+    border-radius: 100px;
+    border: 1px solid #77DD77;
+    color: #77DD77;
+    background-color: white;
+    cursor: pointer;
+    width: 100%;
+    font-size: 15px;
+    height: 40px;
+}
+
+.login-btn:hover {
+    background-color: #77DD77;
+    color: white;
+}
+
+.login-icon {
+    width: 18px;
+    vertical-align: middle;
+    opacity: 60%;
+}
+
+.error {
+    text-align: center;
+    color: red;
+    margin: 0;
+}

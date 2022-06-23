@@ -1,0 +1,271 @@
+/* Portfolio Content */
+
+.gray {
+    background-color: rgba(0,0,0,0.05);
+}
+
+.wrap {
+    width: 50%;
+    margin: auto;
+}
+
+/*/////////////////////////////////////////////////*/
+
+/* Top bar input styles */
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.nav-list input {
+    width: 68px;
+    text-align: center;
+}
+
+/*/////////////////////////////////////////////////*/
+
+/* Portfolio Table */
+
+.table-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.rTable {
+    display: block;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    text-align: center;
+ }
+
+.rTable a {
+     text-decoration: underline;
+     color: #0069c2;
+ }
+
+.rTable a:hover {
+    color: black;
+}
+
+
+ .rTableHeading, .rTableBody, .rTableRow{
+    clear: both;
+ }
+
+ .rTableHead, .rTableFoot, .editTabHead{
+    background-color: #62757b;
+    text-transform: lowercase;
+    padding-top: 5px;
+ }
+
+ .rTableHead {
+    float: left;
+    height: 30px;
+    overflow: hidden;
+    width: 46%;
+    color: white;
+ }
+
+ .rTableCell {
+    float: left;
+    height: 30px;
+    overflow: hidden;
+    width: 46%;
+    font-size: 20px;
+ }
+
+.editTabHead {
+    float: left;
+    height: 30px;
+    overflow: hidden;
+    color: white;
+    width: 8%;
+    background-color: #363535;
+}
+
+.editTabCell {
+    float: left;
+    height: 30px;
+    overflow: hidden;
+    font-size: 20px;
+    width: 8%;
+    background-color: rgba(0,0,0,0.03);
+}
+
+.editTabFoot {
+    float: right;
+    height: 30px;
+    overflow: hidden;
+    color: white;
+    width: 8%;
+    background-color: #363535;
+}
+
+.editTabCell a {
+    text-decoration: none;
+    color: rgb(187, 0, 0);
+}
+
+
+ .rTable:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+ }
+ 
+ .rTableTotal {
+    visibility: hidden;
+    bottom: 0;
+ }
+
+ .head-left {
+    border-radius: 10px 0px 0px 0px;
+ }
+
+ .head-right {
+    border-radius: 0px 10px 0px 0px;
+ }
+
+ .stock-data-row {
+    border: 1px solid #999999;
+    padding: 20px 0;
+    width: 100%;
+    text-align: center;
+    border-radius: 10px;
+    animation: fadeInFromNone 0.5s ease-out;
+ }
+ 
+ @keyframes fadeInFromNone {
+    0% {
+        display: none;
+        opacity: 0;
+    }
+
+    1% {
+        display: block;
+        opacity: 0;
+    }
+
+    100% {
+        display: block;
+        opacity: 1;
+    }
+}
+ @keyframes fadeInFromNone {
+    0% {
+        display: none;
+        opacity: 0;
+    }
+
+    1% {
+        display: block;
+        opacity: 0;
+    }
+
+    100% {
+        display: block;
+        opacity: 1;
+    }
+}
+
+ .stock-information {
+     display: flex;
+     flex-direction: row;
+     justify-content: space-around;
+ }
+
+ .name-price {
+     width: 40%;
+ }
+
+ .data-container {
+     text-align: left;
+     width: 40%;
+ }
+
+ h3 {
+    margin: 0;
+ }
+
+ .stock-name {
+     font-size: 30px;
+ }
+
+ .price-area {
+     font-size: 30px;
+     align-content: center;
+ }
+
+ .day-change {
+     color: red;
+     font-size: 25px;
+ }
+
+ .data {
+     float: right;
+ }
+
+ .hidden-data {
+     display: none;
+ }
+
+ .white {
+     background-color: #f3f4f7;
+ }
+
+ .gray {
+     /* background-color: #DDD; */
+     background-color: rgba(0,0,0,0.02);
+ }
+
+ #save-to-profile {
+     float: right;
+     border: none;
+     padding: 5px;
+     border-radius: 6px;
+     border: 1px solid #77DD77;
+     color: #77DD77;
+     background-color: white;
+     cursor: pointer;
+ }
+
+ #save-to-profile:hover {
+     background-color: #77DD77;
+     color: white;
+ }
+
+ .wrap {
+    position: relative;
+    z-index: 1;
+    background-color: white;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 20px;
+    padding-bottom: 50px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+ }
+
+ .portfolio-total {
+     position: absolute;
+     padding-right: 20px;
+     right: 8%;
+     bottom: 10px;
+     font-size: 20px;
+ }
+
+.w-25 {
+    width: 25%;
+}
+
+.w-50 {
+    width: 50%;
+}
