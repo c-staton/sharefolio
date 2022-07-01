@@ -1,8 +1,9 @@
 import requests
 from app_info import API_BASE_URL, API_SECRET_KEY
 from numerize import numerize
+import random
 
-def get_data(h, portfolio):
+def get_data(h):
     res = requests.get(f"{API_BASE_URL}/quote/{h.ticker}", params={'apikey': API_SECRET_KEY})
     data = res.json()
     rData = data[0]
@@ -16,10 +17,15 @@ def get_data(h, portfolio):
     h.marketCap = numerize.numerize(rData['marketCap'])
     h.volume = numerize.numerize(rData['volume'])
     h.total_value = round(float(h.price) * float(h.shares),2)
-    h.display_shares = round(h.shares,0)
 
 def updateTotalSum(h, portfolio):
     portfolio.total_sum = portfolio.total_sum + h.total_value
 
 def calulatePercent(h, portfolio):
     h.portfolio_percent = round(((h.total_value / portfolio.total_sum) * 100),2)
+
+def get_random_adj():
+    with open("adjectives.txt", 'r') as file:
+        allText = file.read()
+        words = list(map(str, allText.split()))
+        return random.choice(words)

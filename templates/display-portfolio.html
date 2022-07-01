@@ -6,7 +6,7 @@
 
 {% block middleNav %}
     <ul class="nav-list">
-            <p>{{username}}'s Portfolio</p>
+            <p>{{username}}'s portfolio</p>
     </ul>  
 {% endblock %}
 
@@ -50,7 +50,12 @@
                                 <div class="stock-name">{{ h.name }}</div>
                                 <div class="price-area">
                                     <span class="main-price">${{ h.price }}</span>
-                                    <span class="day-change">({{ h.changesPercentage }}%)</span>
+                                    {% if h.changesPercentage >= 0 %}
+                                    <span class="day-change-pos">(+{{ h.changesPercentage }}%)</span>
+                                    {% endif %}
+                                    {% if h.changesPercentage < 0 %}
+                                    <span class="day-change-neg">({{ h.changesPercentage }}%)</span>
+                                    {% endif %}
                                 </div>
                             </div>
                             <div class="data-container">
@@ -71,10 +76,12 @@
             {% endfor %}
         </div>
     </div>
-    <div class="portfolio-total toggle-visible" style="display:none">
-        <span>Total:</span>
-        <span id="total-value-amount">0</span>
-    </div>
+    {% if show_exact == True %}
+        <div class="portfolio-total">
+            <span>Total:</span>
+            <span id="total-value-amount">{{ holdings | sum(attribute='total_value') }}</span>
+        </div>
+    {% endif %}
 </div>
 
 

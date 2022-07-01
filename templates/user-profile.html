@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block css %}
+    <link rel="stylesheet" href="/static/user-profile.css">
+{% endblock %}
+
+{% block middleNav %}
+<ul class="nav-list">
+    <li>
+        portfolio's created by the  <b>{{random_adj}}</b> {{user.username}}
+    </li>
+    
+</ul>
+{% endblock %}
+
+{% block title %}sharefol.io - Home{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% if not user.portfolios%}
+        <span>No portfolios yet :/</span>
+        <form action="/portfolio/new">
+            <button class="btn btn-green" id="create">Create One!</button>
+        </form>
+    {% endif %}
+    <ol>
+        {% for p in user.portfolios %}
+        <li>
+            <div class="port-listing" data-id="{{p.id}}">
+                <div>
+                    <a href="/portfolio/{{p.url_string}}">
+                        {% for h in p.holdings | sort(reverse=true,attribute='portfolio_percent')%}
+                            <span>{{h.ticker}}{{ ", " if not loop.last else "" }}</span>
+                        {% endfor %}
+                    </a>
+                </div>
+                {% if user.username == session['curr_user'] %}
+                    <div>
+                        <form action="/portfolio/{{p.url_string}}/edit">
+                            <button class="btn btn-green">EDIT</button>
+                        </form>
+                        <button class="btn btn-red delete-portfolio">DELETE</button>
+                    </div>
+                {% endif %}
+            </div>
+        </li>
+
+        {% endfor %}
+    </ol>
+    {% if user.portfolios|length >= 1 and user.username == session['curr_user']%}
+    <form action="/portfolio/new">
+        <button class="btn btn-green" id="create-port">Create New Portfolio</button>
+    </form>
+    {% endif %}
+</div>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="/static/user-account.js"></script>
+{% endblock %}

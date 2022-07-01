@@ -21,11 +21,13 @@
                 {% endblock %}
             </div>
             <div class="login-button">
-                {% if 'user_id' not in session %}
-                    <a href="/login" class="button">Login/Sign Up</a>
+                {% if 'curr_user' not in session %}
+                    <a href="/login" class="button">login/register</a>
                 {% endif %}
-                {% if 'user_id' in session %}
-                    <a href="/logout" class="button">Logout</a>
+                {% if 'curr_user' in session %}
+                    <a href="/user/{{session['curr_user']}}">{{session['curr_user']}}</a>
+                    <span class="divider">|</span>
+                    <a href="/logout" class="button">logout</a>
                 {% endif %}
             </div>
         </div>

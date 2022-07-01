@@ -1,9 +1,13 @@
 from crypt import methods
+from email import message
+import uuid
+import requests
 from flask import Flask, jsonify, redirect, render_template, request, session
 from forms import RegisterForm, LoginForm, AddSharesForm
 from models import db, connect_db, User, Portfolio, Holding
 from app_info import API_BASE_URL, API_SECRET_KEY
-from functions import calulatePercent, get_data, updateTotalSum
+from functions import calulatePercent, get_data, get_random_adj, updateTotalSum
+from numerize import numerize
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///sharefolio'
@@ -19,59 +23,83 @@ db.create_all()
 def homepage():
     return render_template('home.html')
 
-@app.route('/portfolio/new', methods=['POST'])
-def create_anon_portfolio():
-    """create new portfolio for user"""
-    newPortfolio = Portfolio()
+@app.route('/user/<username>')
+def show_user(username):
+    random_adj = get_random_adj()
+    user = User.query.filter_by(username=username).first_or_404()
+    return render_template('user-profile.html', user=user, random_adj=random_adj)
 
-    # if user is logged in link portfolio to user
-    if session.get('user_id'):
-        newPortfolio.user_id = session['user_id']
-
-    db.session.add(newPortfolio)
-    db.session.commit()
-    return redirect(f'/portfolio/{newPortfolio.id}/edit')
-
-
-@app.route('/portfolio/<int:folio_id>/edit', methods=['GET', 'POST'])
-def edit_anon_portfolio(folio_id):
-
-    portfolio = Portfolio.query.get_or_404(folio_id)
-
-    # if user is not the owner can only view
-    if session.get('user_id'):
-        if portfolio.user_id != session['user_id']:
-            return redirect(f'/portfolio/{folio_id}')
-
+@app.route('/portfolio/new')
+def new_portfolio():
     form = AddSharesForm()
+    return render_template('stocks.html', form=form)
+
+@app.route('/portfolio/create', methods=['GET','POST'])
+def create_portfolio():
+
+    incoming = request.get_json()
+    data = incoming['data']
+    url = uuid.uuid4().hex
+
+    new_folio = Portfolio(show_exact = incoming['showExact'], url_string = url)
+
+    if session.get('curr_user'):
+        user = User.query.filter_by(username=session['curr_user']).first_or_404()
+        new_folio.user = user
+
+    db.session.add(new_folio)
+    db.session.commit()
+
+    for d in data:
+        h = Holding(ticker=d, shares=data[d], portfolio_id=new_folio.id)
+        get_data(h)
+        updateTotalSum(h, new_folio)
+        db.session.add(h)
+    db.session.commit()
+
+    return jsonify(url=url)
+
+@app.route('/<url_string>/save-edits', methods=['POST'])
+def commit_edits(url_string):
+    portfolio = Portfolio.query.filter_by(url_string=url_string).first_or_404()
+
+    if session.get('curr_user'):
+        if portfolio.user.username != session['curr_user']:
+            return redirect(f'/portfolio/{url_string}')
     
-    holdings = Holding.query.filter_by(portfolio_id=folio_id).order_by(Holding.portfolio_percent.desc())
 
-    if form.validate_on_submit():   
-        ticker = form.symbol.data
-        shares = form.shares.data
+    incoming = request.get_json()
+    data = incoming['data']
 
-        new_holding = Holding(ticker=ticker, shares=shares, portfolio_id=folio_id)
-        get_data(new_holding, portfolio)
-        updateTotalSum(new_holding, portfolio)
-        calulatePercent(new_holding, portfolio)
-        db.session.add(portfolio)
-        db.session.commit()
-        db.session.add(new_holding)
-        db.session.commit()
+    portfolio.show_exact = incoming['showExact']
 
-        for h in holdings: 
-            calulatePercent(h, portfolio)
-            db.session.add(h)  
-        db.session.commit()
-        return redirect(f'/portfolio/{folio_id}/edit')
+    db.session.add(portfolio)
+    db.session.commit()
 
-    return render_template('stocks.html', form=form, holdings=holdings)
+    #clear out any current holdings
+    for h in portfolio.holdings:
+        db.session.delete(h)
+    db.session.commit()
 
-@app.route('/portfolio/<int:folio_id>')
-def show_anon_portfolio(folio_id):
+    portfolio.total_sum = 0
 
-    portfolio = Portfolio.query.get_or_404(folio_id)
+    #add in all holdings
+    for d in data:
+        h = Holding(ticker=d, shares=data[d], portfolio_id=portfolio.id)
+        get_data(h)
+        updateTotalSum(h, portfolio)
+        calulatePercent(h, portfolio)
+        db.session.add(h)
+    db.session.commit()
+
+    return jsonify(message='Success')
+
+
+
+@app.route('/portfolio/<url_string>')
+def show_anon_portfolio(url_string):
+
+    portfolio = Portfolio.query.filter_by(url_string=url_string).first_or_404()
 
     if portfolio.user == None:
         username = 'Anonymous'
@@ -80,15 +108,66 @@ def show_anon_portfolio(folio_id):
 
     show_exact = portfolio.show_exact
 
-    holdings = Holding.query.filter_by(portfolio_id=folio_id).order_by(Holding.portfolio_percent.desc())
+    holdings = Holding.query.filter_by(portfolio_id=portfolio.id).order_by(Holding.portfolio_percent.desc())
 
     for h in holdings: 
-        get_data(h, portfolio)
+        get_data(h)
+        calulatePercent(h, portfolio)
         db.session.add(h)    
 
     db.session.commit()
 
     return render_template('display-portfolio.html', username=username, holdings=holdings, show_exact=show_exact)
+
+@app.route('/portfolio/<url_string>/edit')
+def edit_portfolio(url_string):
+
+    portfolio = Portfolio.query.filter_by(url_string=url_string).first_or_404()
+
+    if portfolio.user.username != session['curr_user']:
+        return redirect(f'/user/{portfolio.user.username}')
+
+    form = AddSharesForm()
+
+    return render_template('stocks_edit.html', form=form, holdings=portfolio.holdings, show_exact=portfolio.show_exact, url_string=portfolio.url_string)
+
+    
+
+
+@app.route('/portfolio/<int:folio_id>', methods=['DELETE'])
+def delete_portfolio(folio_id):
+    """Delete entire portfolios"""
+
+    portfolio = Portfolio.query.get_or_404(folio_id)
+
+    if portfolio.user.username != session['curr_user']:
+        return redirect(f'/user/{portfolio.user.username}')
+
+    db.session.delete(portfolio)
+    db.session.commit()
+    return jsonify(message='deleted')
+
+@app.route('/api/holding/<ticker>')
+def get_holding_info(ticker):
+    """Get and return all data about given ticker"""
+
+    res = requests.get(f"{API_BASE_URL}/quote/{ticker}", params={'apikey': API_SECRET_KEY})
+    data = res.json()
+    rData = data[0]
+
+    stock_info = {
+        "name": rData['name'],
+        "price": round(rData['price'],2),
+        "changesPercentage": round(rData['changesPercentage'],2),
+        "dayLow": round(rData['dayLow'],2),
+        "dayHigh": round(rData['dayHigh'],2),
+        "yearLow": round(rData['yearLow'],2),
+        "yearHigh": round(rData['yearHigh'],2),
+        "marketCap": numerize.numerize(rData['marketCap']),
+        "volume": numerize.numerize(rData['volume'])
+    }
+
+    return stock_info
 
 @app.route('/holding/<int:h_id>', methods=['DELETE'])
 def delete_holding(h_id):
@@ -98,6 +177,10 @@ def delete_holding(h_id):
     db.session.delete(holding)
     db.session.commit()
     return jsonify(message='deleted')
+
+#######################################################
+# SIGN-UP/LOGIN/LOGGOUT
+#######################################################
 
 @app.route('/login', methods=['GET', 'POST'])
 def show_login_page():
@@ -111,8 +194,8 @@ def show_login_page():
         user = User.authenticate(name,pwd)
 
         if user:
-            session['user_id'] = user.id
-            return redirect('/')
+            session['curr_user'] = user.username
+            return redirect(f'/user/{user.username}')
         else:
             form.username.errors = ['Invalid username or password']
 
@@ -140,15 +223,15 @@ def show_sign_up():
         db.session.add(user)
         db.session.commit()
 
-        session['user_id'] = user.id
+        session['curr_user'] = user.username
 
-        return redirect('/')
+        return redirect(f'/user/{user.username}')
     else:
         return render_template('sign-up.html', form=form)
 
 @app.route('/logout')
 def logout():
     """Logs user out and redirects to homepage"""
-    if session.get('user_id'):
-        session.pop('user_id')
+    if session.get('curr_user'):
+        session.pop('curr_user')
     return redirect('/')

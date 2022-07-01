@@ -7,7 +7,7 @@
 {% block middleNav %}
 <ul class="nav-list">
     <li>
-        quickly & easily share your stock portfolio
+        <a href="/portfolio/new">quickly & easily share your stock portfolio</a>
     </li>
     
 </ul>
@@ -22,8 +22,8 @@
     </div>
     <div class="home-info" id="main-info">
         <p>Make a shareable investment portfolio in seconds</p>
-        <form action="/portfolio/new" method="POST">
-            <button class="btn">Create New Portfolio</button>
+        <form action="/portfolio/new">
+            <button class="btn btn-dynamic">Create New Portfolio</button>
         </form>
     </div>
 </div>
@@ -53,6 +53,12 @@
         <img src="/static/images/demo.png">
     </div>
 </div>
+<div class="btn-wrapper">
+    <form action="/portfolio/new">
+        <button class="btn btn-static">Create New Portfolio</button>
+    </form>
+</div>
+
 <div class="footer">
     <p>sharefol.io</p>
 </div>

@@ -4,11 +4,6 @@
     background-color: rgba(0,0,0,0.05);
 }
 
-.wrap {
-    width: 50%;
-    margin: auto;
-}
-
 /*/////////////////////////////////////////////////*/
 
 /* Top bar input styles */
@@ -27,13 +22,6 @@ input::-webkit-inner-spin-button {
 /*/////////////////////////////////////////////////*/
 
 /* Portfolio Table */
-
-.table-options {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-}
 
 .rTable {
     display: block;
@@ -204,9 +192,14 @@ input::-webkit-inner-spin-button {
      align-content: center;
  }
 
- .day-change {
+ .day-change-neg {
      color: red;
      font-size: 25px;
+ }
+
+ .day-change-pos {
+    color: green;
+    font-size: 25px;
  }
 
  .data {
@@ -226,23 +219,9 @@ input::-webkit-inner-spin-button {
      background-color: rgba(0,0,0,0.02);
  }
 
- #save-to-profile {
-     float: right;
-     border: none;
-     padding: 5px;
-     border-radius: 6px;
-     border: 1px solid #77DD77;
-     color: #77DD77;
-     background-color: white;
-     cursor: pointer;
- }
-
- #save-to-profile:hover {
-     background-color: #77DD77;
-     color: white;
- }
-
  .wrap {
+    width: 90%;
+    margin: auto;
     position: relative;
     z-index: 1;
     background-color: white;
@@ -268,4 +247,168 @@ input::-webkit-inner-spin-button {
 
 .w-50 {
     width: 50%;
+}
+
+.get-title input {
+    width: 99%;
+    font-size: 15px;
+}
+
+.get-title {
+    margin-bottom: 12px;
+}
+
+.share-bottom {
+    width: 51%;
+    margin: auto;
+    position: relative;
+    z-index: 1;
+    /* background-color:white; */
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 10px;
+    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+    text-align: center;
+}
+
+.shadow {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.clicked {
+    border: none;
+    padding: 5px;
+    border-radius: 6px;
+    border: 1px solid #77DD77;
+    cursor: pointer;
+    background-color: #77DD77;
+    color: white;
+}
+
+.btn-green {
+    border: none;
+    padding: 5px;
+    border-radius: 6px;
+    border: 1px solid #77DD77;
+    color: #77DD77;
+    background-color: white;
+    cursor: pointer;
+}
+
+.btn-green:hover {
+    background-color: #77DD77;
+    color: white;
+}
+
+#save-to-profile {
+    font-size: 25px;
+    padding: 5px 20px;
+}
+
+#share-url {
+    width: 80%;
+    font-size: 15px;
+    border: none;
+    border-radius: 6px;
+    border: 1px solid;
+    background-color: #62757b;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#copy-url {
+    padding: 5px 10px;
+}
+
+/* Sidebar */
+.page-body {
+    display: flex;
+}
+
+.main-content {
+    width: 75%;
+    margin: 0 auto;
+}
+
+.sidebar {
+    float: left;
+    position: relative;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    background-color: white;
+    height: 100vh;
+    width: 250px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    z-index: 15;
+}
+
+.sidebar-wrapper {
+    padding: 0 4%;
+    height: 50px;
+}
+
+.sidebar-control {
+    display: flex;flex-direction: column;
+    gap: 5px;
+}
+
+.table-options {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    gap: 20px;
+    font-size: 25px;
+}
+
+.error-msg {
+    color: red;
+}
+
+#details {
+    color: gray;
+    font-size: 15px;
+}
+
+#add-stock{
+    width: 100%;
+    font-size: 20px;
+    font-family: inherit;
+    margin: 10px 0;
+}
+
+.notes {
+    font-size: 14px;
+}
+
+.stock-form {
+    font-size: 25px;
+}
+
+.stock-form input {
+    font-size: 25px;
+    width: 100px;
+    float: right;
+}
+
+.stock-inputs {
+    width: 100%;
+}
+
+#investments {
+    font-family: inherit;
+    font-size: inherit;
+    text-align: center;
+    width: 100%;
+}
+
+.settings {
+    font-size: 20px;
+}
+
+.settings input {
+    width: 20px;
+    height: 20px;
+    float: right;
 }
