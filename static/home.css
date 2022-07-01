@@ -1,3 +1,8 @@
+.btn-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
 .btn {
     margin-top: 10px;
     border: none;
@@ -7,9 +12,16 @@
     color: #77DD77;
     background-color: white;
     cursor: pointer;
-    width: 100%;
     font-size: 20px;
     height: 40px;
+}
+
+.btn-static {
+    width: 500px;
+}
+
+.btn-dynamic {
+    width: 100%;
 }
 
 .btn:hover {

@@ -1,0 +1,66 @@
+
+.container{
+    margin: auto;
+    position: relative;
+    background-color: white;
+    margin-top: 80px;
+    margin-bottom: 15px;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 60%;
+    font-size: 30px;
+}
+
+.port-listing {
+    display: flex;
+    justify-content: space-between;
+}
+
+h1 {
+    font-weight: 400;
+}
+
+a {
+    text-decoration: none;
+}
+
+.btn {
+    border: none;
+    padding: 5px;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: white;
+}
+
+.btn-green {
+    border: 1px solid #77DD77;
+    color: #77DD77;
+}
+
+.btn-green:hover {
+    background-color: #77DD77;
+    color: white;
+}
+
+.btn-red {
+    border: 1px solid red;
+    color:red;
+}
+
+.btn-red:hover {
+    background-color:red;
+    columns: white;
+}
+
+form {
+    display: inline;
+}
+
+#create {
+    font-size: 20px;
+}
+
+#create-port {
+    margin: auto;
+}

@@ -8,86 +8,74 @@
 
 {% block middleNav %}
     <ul class="nav-list">
-        <form method="POST">
-            {{ form.hidden_tag() }}
-            <label for="">Add new holding:</label>
-            {{ form.symbol (onkeydown="upperCaseF(this)", placeholder='Symbol', maxlength='5')}}
-            {{ form.shares (placeholder='# of Shares')}}
-            <button id="add-stock">Add</button>
-        </form>
+        <p>Create Your New Portfolio</p>
     </ul>
 {% endblock %}
 
 
 {% block content %}
-
-    <div class="wrap">
-        <div class="table-options">
-            <div>
-                <label for="">Show Exact Values?</label>
-                <input type="checkbox" name="hide-values" id="hide-exact-checkbox">
-            </div>
-
-            <div>
-                <label for="sort-by">Allow Comments? </label>
-                <input type="checkbox" name="allow-comments">
-            </div>
-    
-            <button id="save-to-profile">Save & Share</button>
-        </div>
-
-        <div class="rTable">
-            <div class="rTableRow">
-                <div class="rTableHead head-left">Symbol</div>
-                <div class="rTableHead">Percentage</div>
-                <div class="rTableHead toggle-visible" style="display:none">Shares</div>
-                <div class="rTableHead toggle-visible" style="display:none">Value</div>
-                <div class="editTabHead head-right">Del</div>
-            </div>
-
-            <div class="rTableBody">
-                {% for h in holdings %}
-                <div data-id="{{h.id}}">
-                    <div class="rTableRow" id="${ticker}">
-                        <div class="rTableCell ${colorClass}"><a href="" class="open-data">{{ h.ticker }}</a></div>
-                        <div class="rTableCell ${colorClass} percentage">{{ h.portfolio_percent }}%</div>
-                        <div class="rTableCell toggle-visible ${colorClass}" style="display:none">{{ h.shares }}</div>
-                        <div class="rTableCell toggle-visible ${colorClass}" style="display:none">${{ h.total_value }}</div>
-                        <div class="editTabCell"><a href="" class="delete-stock">X</a></div>
-                    </div>
-                    <div class="rTableRow hidden-data">
-                        <div class="stock-data-row">
-                            <div class="stock-information">
-                                <div class="name-price">
-                                    <div class="stock-name">{{ h.name }}</div>
-                                    <div class="price-area">
-                                        <span class="main-price">${{ h.price }}</span>
-                                        <span class="day-change">({{ h.changesPercentage }}%)</span>
-                                    </div>
-                                </div>
-                                <div class="data-container">
-                                    <div>
-                                        <div>Day Range: <span class="data">${{ h.dayLow }} - ${{ h.dayHigh }}</span></div>
-                                    </div>
-                                    <div>
-                                        <div>Year Range: <span class="data">${{ h.yearLow }} - ${{ h.yearHigh }}</span></div>
-                                    </div>
-                                    <div>
-                                        <div>Mkt Cap: <span class="data">{{ h.marketCap }}</span></div>
-                                        <div>Vol: <span class="data">{{ h.volume }}</span></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+<div class="page-body">
+    <div class="sidebar">
+        <div class="sidebar-wrapper">
+            <div class="table-options">
+                <div class="sidebar-control">
+                    <label for="investments"><u>Investment Type:</u></label>
+                    <select name="investments" id="investments">
+                        <option value="stocks">Stocks</option>
+                        <option value="crypto">Crypto</option>
+                    </select>
+                    <span class="error-msg"></span>
+                    <form class="stock-form">
+                        <label id="symbol-label">Ticker:</label>
+                        <input id="symbol" maxlength="5" name="symbol" onkeydown="upperCaseF(this)" placeholder="ex: AAPL" type="text">
+                        <br>
+                        <label id="shares-label">Shares:</label>
+                        <input id="shares" name="shares" placeholder="ex: 25" step="any" type="number">
+                        <br>
+                        <button class="btn-green" id="add-stock">Add to Portfolio</button>
+                    </form>
                 </div>
-                {% endfor %}
+                <div class="settings">
+                    <label><u>Settings:</u></label><br>
+                    <label for="">Show Exact Values?</label>
+                    <input type="checkbox" name="hide-values" id="hide-exact-checkbox">
+                </div>
+                {% if not session.get('curr_user') %}
+                    <div class="notes">
+                        <p><i>Before making your portfolio, <a href="/login">Login</a> or <a href="/sign-up">register</a> to save to your profile. Otherwise your portfolio will be saved anonymously.</i></p>
+                    </div>
+                {% endif %}
             </div>
-        </div>
-        <div class="portfolio-total toggle-visible" style="display:none">
-            <span>Total:</span>
-            <span id="total-value-amount">{{holdings | sum(attribute='total_value') }}</span>
+
         </div>
     </div>
+
+    <div class="main-content">
+        <div class="wrap">
+            <div class="rTable">
+                <div class="rTableRow">
+                    <div class="rTableHead head-left">Symbol</div>
+                    <div class="rTableHead">Percentage</div>
+                    <div class="rTableHead toggle-visible" style="display:none">Shares</div>
+                    <div class="rTableHead toggle-visible" style="display:none">Value</div>
+                    <div class="editTabHead head-right">Del</div>
+                </div>
+    
+                <div class="rTableBody">
+                </div>
+            </div>
+            <div class="portfolio-total toggle-visible" style="display:none">
+                <span>Total: $</span>
+                <span id="total-value-amount">0</span>
+            </div>
+        </div>
+        <div class="share-bottom">
+            <button class="btn-green shadow" style="display:none" id="save-to-profile">Save & Share</button>
+            <input id="share-url" type="text" style="display:none">
+            <button class="btn-green" id="copy-url" style="display:none">Copy</button>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
 </html>

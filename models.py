@@ -1,3 +1,6 @@
+from email.policy import default
+from enum import unique
+from turtle import title
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 
@@ -52,6 +55,12 @@ class Portfolio(db.Model):
 
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
 
+    url_string = db.Column(db.Text, nullable=False, unique = True)
+
+    title = db.Column(db.Text, default = 'Untitled')
+
+    description = db.Column(db.Text, default = '')
+
     show_exact = db.Column(db.Boolean, default = False)
 
     total_sum = db.Column(db.Float, default = 0)
@@ -66,7 +75,7 @@ class Holding(db.Model):
 
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
 
-    ticker = db.Column(db.String(5), nullable = False)
+    ticker = db.Column(db.Text, nullable = False)
 
     shares = db.Column(db.Float, nullable = False)
 
