@@ -1,7 +1,4 @@
-import json
 from unittest import TestCase
-
-from flask import session
 from app import app
 from models import db, User, Portfolio, Holding
 
