@@ -64,3 +64,12 @@ form {
 #create-port {
     margin: auto;
 }
+
+@media screen and (max-width: 600px) {
+    .container {
+        width: 90%;
+        font-size: 18px;
+        padding: 5px;
+        margin-top: 0;
+    }
+}

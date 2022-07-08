@@ -16,6 +16,10 @@
 {% block title %}sharefol.io - Home{% endblock %}
 
 {% block content %}
+<div class="mobile-title">
+    <p>portfolio's created by the  <b>{{random_adj}}</b> {{user.username}}</p>
+</div>
+
 <div class="container">
     {% if not user.portfolios%}
         <span>No portfolios yet :/</span>
