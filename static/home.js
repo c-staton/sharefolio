@@ -12,7 +12,7 @@ function animateOnScroll(eleId, animateClass) {
   
 animateOnScroll('main-img', 'slide-left');
 animateOnScroll('first-img', 'slide-right');
-animateOnScroll('second-img', 'slide-left');
+animateOnScroll('second-img', 'slide-right');
 animateOnScroll('third-img', 'slide-right');
 
 animateOnScroll('main-info', 'fade-in');
