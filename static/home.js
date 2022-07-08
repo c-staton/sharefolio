@@ -8,12 +8,10 @@ function animateOnScroll(eleId, animateClass) {
     });
 
     observer.observe(document.getElementById(eleId));
+    return
 }
   
 animateOnScroll('main-img', 'slide-left');
-animateOnScroll('first-img', 'slide-right');
-animateOnScroll('second-img', 'slide-right');
-animateOnScroll('third-img', 'slide-right');
 
 animateOnScroll('main-info', 'fade-in');
 animateOnScroll('first-info', 'fade-in');

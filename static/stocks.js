@@ -1,4 +1,4 @@
-const domain = 'http://127.0.0.1:5000';
+const domain = 'https://www.sharefol.io';
 
 function upperCaseF(a){
     setTimeout(function(){
