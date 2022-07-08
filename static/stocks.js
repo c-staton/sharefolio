@@ -1,3 +1,5 @@
+const domain = 'http://127.0.0.1:5000';
+
 function upperCaseF(a){
     setTimeout(function(){
         a.value = a.value.toUpperCase();
@@ -32,6 +34,11 @@ async function addNewHolding(evt){
 
     if(ticker === '' || shares === '') {
         $('.error-msg').text(`Fields can't be empty`);
+        return;
+    }
+
+    if(shares <= 0) {
+        $('.error-msg').text(`Must enter an amount greater than 0`);
         return;
     }
 
@@ -174,10 +181,16 @@ async function sendToDB(){
     $("#hide-exact-checkbox").is(':checked') ? showExact = 1 : showExact = 0;
     const res = await axios.post('/portfolio/create', {'data': FOLIO, 'showExact': showExact});
     const url = res.data.url;
-    $('#share-url').val(`http://127.0.0.1:5000/portfolio/${url}`)
+    $('#share-url').val(`${domain}/portfolio/${url}`)
     $('#share-url').show()
     $('#copy-url').show()
     $('#save-to-profile').hide()
+
+    $("#symbol").prop("disabled", true);
+    $("#shares").prop("disabled", true);
+    $("#add-stock").prop("disabled", true);
+    $("#investments").prop("disabled", true);
+    $("#hide-exact-checkbox").prop("disabled", true);
 }
 
 $("#save-to-profile").on('click', sendToDB)
@@ -188,7 +201,7 @@ async function sendEditsToDB(){
     let showExact;
     $("#hide-exact-checkbox").is(':checked') ? showExact = 1 : showExact = 0;
     const res = await axios.post(`/${url}/save-edits`, {'data': FOLIO, 'showExact': showExact});
-    $('#share-url').val(`http://127.0.0.1:5000/portfolio/${url}`)
+    $('#share-url').val(`${domain}/portfolio/${url}`)
     $('#share-url').show()
     $('#copy-url').show()
     $('#save-edits').hide()

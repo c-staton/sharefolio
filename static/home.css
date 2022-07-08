@@ -33,7 +33,7 @@
     display: flex;
     justify-content: space-evenly;
     margin: 40px;
-    margin-bottom: 80px;
+    margin-bottom: 100px;
     align-items: center;
 }
 
@@ -112,4 +112,23 @@ h1 {
 .footer p {
     text-align: center;
     top: 50px;
+}
+
+@media screen and (max-width: 600px) {
+    .container {
+        display: inline;
+        text-align: center;
+    }
+
+    .home-img {
+        overflow: hidden;
+        width: 80%;
+        border-radius: 20px;
+        margin: auto;
+    }
+    
+    .home-info {
+        width: 80%;
+        margin: auto;
+    }
 }

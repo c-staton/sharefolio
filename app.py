@@ -1,5 +1,3 @@
-from crypt import methods
-from email import message
 import uuid
 import requests
 from flask import Flask, jsonify, redirect, render_template, request, session
@@ -21,21 +19,28 @@ db.create_all()
 
 @app.route('/')
 def homepage():
+    """Displays static homepage"""
+
     return render_template('home.html')
 
 @app.route('/user/<username>')
 def show_user(username):
+    """Displays specific user profile"""
+
     random_adj = get_random_adj()
     user = User.query.filter_by(username=username).first_or_404()
     return render_template('user-profile.html', user=user, random_adj=random_adj)
 
 @app.route('/portfolio/new')
 def new_portfolio():
+    """Display new portfolio creation form"""
+
     form = AddSharesForm()
     return render_template('stocks.html', form=form)
 
-@app.route('/portfolio/create', methods=['GET','POST'])
+@app.route('/portfolio/create', methods=['POST'])
 def create_portfolio():
+    """Creates new portfolio in database with all given data"""
 
     incoming = request.get_json()
     data = incoming['data']
@@ -61,6 +66,8 @@ def create_portfolio():
 
 @app.route('/<url_string>/save-edits', methods=['POST'])
 def commit_edits(url_string):
+    """Saves all the made changes to specific portfolio"""
+
     portfolio = Portfolio.query.filter_by(url_string=url_string).first_or_404()
 
     if session.get('curr_user'):
@@ -88,8 +95,13 @@ def commit_edits(url_string):
         h = Holding(ticker=d, shares=data[d], portfolio_id=portfolio.id)
         get_data(h)
         updateTotalSum(h, portfolio)
-        calulatePercent(h, portfolio)
         db.session.add(h)
+    db.session.commit()
+
+    for h in portfolio.holdings:
+        calulatePercent(h, portfolio)
+
+    db.session.add(portfolio)
     db.session.commit()
 
     return jsonify(message='Success')
@@ -97,7 +109,8 @@ def commit_edits(url_string):
 
 
 @app.route('/portfolio/<url_string>')
-def show_anon_portfolio(url_string):
+def show_portfolio(url_string):
+    """Display specific portfolio"""
 
     portfolio = Portfolio.query.filter_by(url_string=url_string).first_or_404()
 
@@ -110,17 +123,26 @@ def show_anon_portfolio(url_string):
 
     holdings = Holding.query.filter_by(portfolio_id=portfolio.id).order_by(Holding.portfolio_percent.desc())
 
+    portfolio.total_sum = 0
+
     for h in holdings: 
         get_data(h)
-        calulatePercent(h, portfolio)
-        db.session.add(h)    
+        updateTotalSum(h, portfolio)
+        db.session.add(h)   
 
+    db.session.commit()
+
+    for h in holdings: 
+        calulatePercent(h, portfolio) 
+
+    db.session.add(portfolio)
     db.session.commit()
 
     return render_template('display-portfolio.html', username=username, holdings=holdings, show_exact=show_exact)
 
 @app.route('/portfolio/<url_string>/edit')
 def edit_portfolio(url_string):
+    """Give portfolio author the form to edit specific portfolio"""
 
     portfolio = Portfolio.query.filter_by(url_string=url_string).first_or_404()
 
@@ -185,6 +207,7 @@ def delete_holding(h_id):
 @app.route('/login', methods=['GET', 'POST'])
 def show_login_page():
     """Login user: produce form & handle login"""
+
     form = LoginForm()
 
     if form.validate_on_submit():
@@ -232,6 +255,7 @@ def show_sign_up():
 @app.route('/logout')
 def logout():
     """Logs user out and redirects to homepage"""
+    
     if session.get('curr_user'):
         session.pop('curr_user')
     return redirect('/')

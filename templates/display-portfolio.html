@@ -6,7 +6,7 @@
 
 {% block middleNav %}
     <ul class="nav-list">
-            <p>{{username}}'s portfolio</p>
+            <p>{{username}}'s Investment Portfolio</p>
     </ul>  
 {% endblock %}
 
@@ -14,7 +14,11 @@
 
 {% block content %}
 
-<div class="wrap">
+<div class="mobile-title">
+    <p>{{username}}'s Investment Portfolio</p>
+</div>
+
+<div class="wrap-display">
     <div class="rTable">
         <div class="rTableRow">
             {% if show_exact == False %}

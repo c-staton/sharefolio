@@ -27,6 +27,8 @@ class User(db.Model):
 
     password = db.Column(db.Text, nullable = False)
 
+    # portfolios = db.relationship('Portfolio', cascade="all,delete", backref='user')
+
     @classmethod
     def register(cls, email, username, pwd):
         """Register user w/ hashed password & return user"""
@@ -65,7 +67,7 @@ class Portfolio(db.Model):
 
     total_sum = db.Column(db.Float, default = 0)
 
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), default = None)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id',  ondelete='CASCADE'), default = None)
 
     user = db.relationship('User', backref='portfolios')
     
@@ -101,7 +103,7 @@ class Holding(db.Model):
 
     volume = db.Column(db.Text)
 
-    portfolio_id = db.Column(db.Integer, db.ForeignKey('portfolios.id'))
+    portfolio_id = db.Column(db.Integer, db.ForeignKey('portfolios.id',  ondelete='CASCADE'))
 
     portfolio = db.relationship('Portfolio', backref = 'holdings')
 
