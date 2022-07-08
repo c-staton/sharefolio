@@ -6,13 +6,13 @@ from models import db, connect_db, User, Portfolio, Holding
 from app_info import API_BASE_URL, API_SECRET_KEY
 from functions import calulatePercent, get_data, get_random_adj, updateTotalSum
 from numerize import numerize
+import os
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///sharefolio'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
-
-app.config['SECRET_KEY'] = "adfasdfaspkg"
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'hellosecret1')
 
 connect_db(app)
 db.create_all()
@@ -255,7 +255,7 @@ def show_sign_up():
 @app.route('/logout')
 def logout():
     """Logs user out and redirects to homepage"""
-    
+
     if session.get('curr_user'):
         session.pop('curr_user')
     return redirect('/')
