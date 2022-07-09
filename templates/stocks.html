@@ -26,12 +26,14 @@
                     </select>
                     <span class="error-msg"></span>
                     <form class="stock-form">
-                        <label id="symbol-label">Ticker:</label>
-                        <input id="symbol" maxlength="5" name="symbol" onkeydown="upperCaseF(this)" placeholder="ex: AAPL" type="text" autocomplete="off">
-                        <br>
-                        <label id="shares-label">Shares:</label>
-                        <input id="shares" name="shares" placeholder="ex: 25" step="any" type="number">
-                        <br>
+                        <div>
+                            <label id="symbol-label">Ticker:</label>
+                            <input id="symbol" maxlength="5" name="symbol" onkeydown="upperCaseF(this)" placeholder="ex: AAPL" type="text" autocomplete="off">
+                        </div>
+                        <div>
+                            <label id="shares-label">Shares:</label>
+                            <input id="shares" name="shares" placeholder="ex: 25" step="any" type="number">
+                        </div>
                         <button class="btn-green" id="add-stock">Add to Portfolio</button>
                     </form>
                 </div>
