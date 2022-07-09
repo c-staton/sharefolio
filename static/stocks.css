@@ -427,6 +427,10 @@ input::-webkit-inner-spin-button {
     float: right;
 }
 
+.percentage-sym {
+    display: none;
+}
+
 @media screen and (max-width: 600px) {
 
     .main-content {
@@ -457,5 +461,18 @@ input::-webkit-inner-spin-button {
 
     .stock-form-input {
         margin-bottom: 10px;
+    }
+
+    .rTableCell, .rTableHead {
+        font-size: 16px;
+        overflow: scroll;
+    }
+
+    .percentage {
+        display: none;
+    }
+
+    .percentage-sym {
+        display: block;
     }
 }

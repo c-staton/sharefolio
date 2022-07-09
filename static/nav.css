@@ -1,11 +1,14 @@
 /* Nav Bar */
 
 #nav {
-    position: relative;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
     border-bottom: 1px solid rgba(0,0,0,0.05);
     background-color: #333333;
     height: 50px;
     width: 100%;
+    z-index: 50;
 }
 
 #nav a {
