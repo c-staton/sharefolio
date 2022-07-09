@@ -23,11 +23,13 @@
         <div class="rTableRow">
             {% if show_exact == False %}
                 <div class="rTableHead head-left w-50">Symbol</div>
-                <div class="rTableHead head-right w-50">Percentage</div>
+                <div class="rTableHead head-right w-50 percentage">Percentage</div>
+                <div class="rTableHead head-right w-50 percentage-sym">%</div>
             {% endif %}
             {% if show_exact == True %}
                 <div class="rTableHead head-left w-25">Symbol</div>
-                <div class="rTableHead w-25">Percentage</div>
+                <div class="rTableHead w-25 percentage">Percentage</div>
+                <div class="rTableHead w-25 percentage-sym">%</div>
                 <div class="rTableHead w-25">Shares</div>
                 <div class="rTableHead w-25 head-right">Value</div>
             {% endif %}
