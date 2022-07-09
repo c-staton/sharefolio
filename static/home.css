@@ -131,4 +131,8 @@ h1 {
         width: 80%;
         margin: auto;
     }
+
+    .btn-static {
+        width: 250px;
+    }
 }
