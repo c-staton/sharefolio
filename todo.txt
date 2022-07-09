@@ -1,4 +1,0 @@
-- Add error handling for 'ticker not found'
-- Add edit button for logged in viewers vieweing their own portfolio
-- Add a field to add a comment/description of your portfolio
-- Add the abiltity to toggle to allow comments on your portfolio
