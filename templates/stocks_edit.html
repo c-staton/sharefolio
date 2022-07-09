@@ -53,7 +53,8 @@
             <div class="rTable" data-url="{{url_string}}">
                 <div class="rTableRow">
                     <div class="rTableHead head-left">Symbol</div>
-                    <div class="rTableHead">Percentage</div>
+                    <div class="rTableHead percentage">Percentage</div>
+                    <div class="rTableHead percentage-sym">%</div>
                     <div class="rTableHead toggle-visible" style="display:none">Shares</div>
                     <div class="rTableHead toggle-visible" style="display:none">Value</div>
                     <div class="editTabHead head-right">Del</div>
@@ -64,7 +65,7 @@
                     <div data-value="{{h.total_value}}" data-ticker="{{h.ticker}}" data-shares="{{h.shares}}">
                         <div class="rTableRow">
                             <div class="rTableCell"><a href="" class="open-data">{{ h.ticker }}</a></div>
-                            <div class="rTableCell percentage">{{ h.portfolio_percent }}%</div>
+                            <div class="rTableCell">{{ h.portfolio_percent }}%</div>
                             <div class="rTableCell toggle-visible" style="display: none;">{{ h.shares }}</div>
                             <div class="rTableCell toggle-visible" style="display: none;">{{ h.total_value }}</div>
                             <div class="editTabCell"><a href="" class="delete-stock">X</a></div>

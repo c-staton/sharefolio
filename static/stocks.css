@@ -475,4 +475,12 @@ input::-webkit-inner-spin-button {
     .percentage-sym {
         display: block;
     }
+
+    .share-bottom {
+        width: 90%;
+    }
+
+    /* #share-url {
+        width: ;
+    } */
 }
