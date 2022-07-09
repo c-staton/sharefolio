@@ -115,7 +115,7 @@ function appendToPage(ticker, shares, data){
         <div data-value="${totalValue}" data-ticker="${ticker}">
             <div class="rTableRow">
                 <div class="rTableCell"><a href="" class="open-data">${ticker}</a></div>
-                <div class="rTableCell percentage">${(totalValue/folioSum)*100}%</div>
+                <div class="rTableCell">${(totalValue/folioSum)*100}%</div>
                 <div class="rTableCell toggle-visible" style="${styleHide}">${shares}</div>
                 <div class="rTableCell toggle-visible" style="${styleHide}">$${totalValue}</div>
                 <div class="editTabCell"><a href="" class="delete-stock">X</a></div>

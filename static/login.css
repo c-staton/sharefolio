@@ -100,3 +100,9 @@
     color: red;
     margin: 0;
 }
+
+@media screen and (max-width: 600px) {
+    .login-wrap {
+        width: 70%;
+    }
+}
