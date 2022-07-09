@@ -1,11 +1,5 @@
 const domain = 'https://www.sharefol.io';
 
-function upperCaseF(a){
-    setTimeout(function(){
-        a.value = a.value.toUpperCase();
-    }, 1);
-}
-
 $(".rTable").on('click', '.open-data', function(evt){
     evt.preventDefault();
     $(this).parent().parent().next().toggle();

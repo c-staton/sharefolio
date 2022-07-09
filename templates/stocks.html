@@ -28,7 +28,7 @@
                     <form class="stock-form">
                         <div class="stock-form-input">
                             <label id="symbol-label">Ticker:</label>
-                            <input id="symbol" maxlength="5" name="symbol" onkeydown="upperCaseF(this)" placeholder="ex: AAPL" type="text" autocomplete="off">
+                            <input id="symbol" maxlength="5" name="symbol" oninput="this.value = this.value.toUpperCase()" placeholder="ex: AAPL" type="text" autocomplete="off">
                         </div>
                         <div>
                             <label id="shares-label">Shares:</label>
