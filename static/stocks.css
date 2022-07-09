@@ -460,5 +460,9 @@ input::-webkit-inner-spin-button {
         overflow: scroll;
     }
 
+    .stock-form-input {
+        margin-bottom: 10px;
+    }
+
 
 }
