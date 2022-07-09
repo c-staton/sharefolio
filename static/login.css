@@ -103,6 +103,8 @@
 
 @media screen and (max-width: 600px) {
     .login-wrap {
-        width: 70%;
+        width: 85%;
+        padding: 20px 0px;
+        margin-top: 30px;
     }
 }
