@@ -455,4 +455,10 @@ input::-webkit-inner-spin-button {
     .notes {
         display: none;
     }
+
+    .rTableHead, .rTableCell {
+        overflow: scroll;
+    }
+
+
 }
