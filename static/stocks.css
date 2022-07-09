@@ -440,7 +440,7 @@ input::-webkit-inner-spin-button {
     .sidebar {
         float: none;
         width: 100%;
-        height: 310px;
+        height: 340px;
     }
 
     .table-options {
@@ -454,7 +454,7 @@ input::-webkit-inner-spin-button {
     .notes {
         display: none;
     }
-    
+
     .stock-form-input {
         margin-bottom: 10px;
     }
