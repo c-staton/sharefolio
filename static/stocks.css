@@ -32,12 +32,13 @@ input::-webkit-inner-spin-button {
  }
 
 .rTable a {
-     text-decoration: underline;
-     color: #0069c2;
+    color: #0069c2;
+     text-decoration: none;
  }
 
 .rTable a:hover {
-    color: black;
+    text-decoration: underline;
+
 }
 
 
@@ -429,6 +430,10 @@ input::-webkit-inner-spin-button {
 
 .percentage-sym {
     display: none;
+}
+
+.info-sym {
+    font-size: 12px;
 }
 
 @media screen and (max-width: 600px) {
