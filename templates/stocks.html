@@ -56,11 +56,27 @@
         <div class="wrap">
             <div class="rTable">
                 <div class="rTableRow">
-                    <div class="rTableHead head-left">Symbol</div>
-                    <div class="rTableHead percentage">Percentage</div>
+                    <div class="rTableHead head-left">Symbol
+                        <div class="tooltip info-sym">&#9432;
+                            <span class="tooltiptext">displays the ticker of each holding, click any ticker for market data</span>
+                        </div>
+                    </div>
+                    <div class="rTableHead percentage">Percentage
+                        <div class="tooltip info-sym">&#9432;
+                            <span class="tooltiptext">displays the percentage each holding takes up of your entire portfolio</span>
+                        </div>
+                    </div>
                     <div class="rTableHead percentage-sym">%</div>
-                    <div class="rTableHead toggle-visible" style="display:none">Shares</div>
-                    <div class="rTableHead toggle-visible" style="display:none">Value</div>
+                    <div class="rTableHead toggle-visible" style="display:none">Shares
+                        <div class="tooltip info-sym">&#9432;
+                            <span class="tooltiptext">displays the quantity of shares for each holding</span>
+                        </div>
+                    </div>
+                    <div class="rTableHead toggle-visible" style="display:none">Value
+                        <div class="tooltip info-sym">&#9432;
+                            <span class="tooltiptext">displays the value of each holding in USD</span>
+                        </div>
+                    </div>
                     <div class="editTabHead head-right">Del</div>
                 </div>
     
@@ -68,13 +84,14 @@
                 </div>
             </div>
             <div class="portfolio-total toggle-visible" style="display:none">
-                <span>Total: $</span>
+                <span>Total:</span>
+                <span>$</span>
                 <span id="total-value-amount">0</span>
             </div>
         </div>
         <div class="share-bottom">
             <button class="btn-green shadow" style="display:none" id="save-to-profile">Save & Share</button>
-            <input id="share-url" type="text" style="display:none">
+            <input id="share-url" type="text" style="display:none" readonly>
             <button class="btn-green" id="copy-url" style="display:none">Copy</button>
         </div>
     </div>

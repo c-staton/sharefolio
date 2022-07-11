@@ -22,11 +22,51 @@ body {
     background-color: inherit;
 }
 
+.tooltip {
+    position: fixed;
+    display: inline-block;
+    transform: translate(20%, 25%);
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 250px;
+    background-color: #333333;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 100;
+    top: 150%;
+    left: 50%;
+    margin-left: -125px;
+  }
+  
+  .tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent black transparent;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
+
 @media screen and (max-width: 600px) {
     .mobile-title {
         text-align: center;
         font-size: 25px;
         margin: 10px;
+    }
+
+    .tooltip {
+        display: none;
     }
 }
 
